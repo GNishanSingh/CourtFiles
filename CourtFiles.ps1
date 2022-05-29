@@ -17,7 +17,7 @@ function Get-CourtFiles (
 
 function Get-CourtFilePath ($searchstring,$Folderpath){
     Get-ChildItem -path $Folderpath | ForEach-Object {
-        if (($_.BaseName -replace "\W",'') -match $searchstring){
+        if (($_.BaseName -replace "\W",'') -match ($searchstring -replace "\W",'')){
             $_.FullName
         }
     }
