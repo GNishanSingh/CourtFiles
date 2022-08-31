@@ -10,6 +10,30 @@ function readpdf ($filepath) {
     }
 }
 
+function Export-PDFTable ($Dataset,$Filepath){
+    $fstream = [System.IO.FileStream]::new($Filepath, [System.IO.FileMode]::Create)
+    $document = [iTextSharp.text.Document]::new([iTextSharp.text.PageSize]::A5, 25, 25, 30, 30)
+    $writer = [iTextSharp.text.pdf.PdfWriter]::GetInstance($document, $fstream)
+    $document.Open()
+    $table = [iTextSharp.text.pdf.PdfPTable]::new(2)
+    ($Dataset | Get-Member -MemberType NoteProperty).Name |ForEach-Object {
+        $table.AddCell($_)
+    }
+    $Dataset | ForEach-Object {
+        $table.AddCell($_.CaseCode)
+        $cell = [iTextSharp.text.pdf.PdfPCell]::new()
+        $text = [iTextSharp.text.Anchor]::new($_.Filename)
+        $text.Reference = $_.Filename
+        $para = [iTextSharp.text.Paragraph]::new()
+        $para.Add($text) | Out-Null
+        $cell.AddElement($para) | Out-Null
+        $table.AddCell($cell) | Out-Null
+    }
+    $document.Add($table)
+    $document.Close()
+    $writer.close()
+    $fstream.Close()
+}
 function HPCaseFiles ($causelistpath, $outpath, $HeaderPattern) {
     $casedata = readpdf -filepath $causelistpath | Where-Object { $_.pagetext -match $HeaderPattern } | ForEach-Object { 
         ($_.pagetext | Select-String -Pattern "\w+\s+\d+\/\d+" -AllMatches).Matches.Value | ForEach-Object {
@@ -22,7 +46,9 @@ function HPCaseFiles ($causelistpath, $outpath, $HeaderPattern) {
         } 
     } 
     if ($outpath) {
-        $casedata | Export-Excel $output
+        if (Export-PDFTable -Dataset $casedata -Filepath $outpath){
+            Write-Host "File Generated Successfully $outpath"
+        }
     }
     else {
         $casedata
