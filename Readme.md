@@ -1,10 +1,13 @@
 # Installation
-Download all the files and run following command
-```pwsh
-cd <download path>
-Import-Module Courtfiles.ps1
-```
+ - open powershell on windows 10 and later with admin permission. run following command
+ ```powershell
+ install-module ImportExcel
+ ```
+ - Download this folder on some folder. Then run following command
+ ```powershell
+ import-module <# This folder download location + ReadCourtFile.ps1 #>
+ ```
 ## Usage
-```pwsh
-Get-CourtFilePath -searchstring "string which you want to search" -folderpath "Path where all the file exist"
+```powershell
+HPCaseFile -causelistpath <# causelist pdf file location #> -outpath <# path for excel file #> -HeaderPattern <# pattern want to match for pages. e.g. Court - 1 or Court\s+-\s+1 #>
 ```
