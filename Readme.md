@@ -1,9 +1,5 @@
 # Installation
- - open powershell on windows 10 and later with admin permission. run following command
- ```powershell
- install-module ImportExcel
- ```
- - Download this folder on some folder. Then run following command
+ - Download this folder on windows 10 and later. Then run following command
  ```powershell
  import-module <# This folder download location + ReadCourtFile.ps1 #>
  ```
@@ -11,5 +7,5 @@
  - Run below Command in folder contains CourtFiles
 ```powershell
 CD <# Folder path which contains court files #>
-HPCaseFile -causelistpath <# causelist pdf file location #> -outpath <# path for excel file #> -HeaderPattern <# pattern want to match for pages. e.g. Court - 1 or Court\s+-\s+1 #>
+HPCaseFile -causelistpath <# causelist pdf file location #> -outpath <# path for pdf file #> -HeaderPattern <# pattern want to match for pages. e.g. Court - 1 or Court\s+-\s+1 #>
 ```
