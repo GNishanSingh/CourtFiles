@@ -22,7 +22,8 @@ function Export-PDFTable ($Dataset,$Filepath){
     $Dataset | ForEach-Object {
         $table.AddCell($_.CaseCode)
         $cell = [iTextSharp.text.pdf.PdfPCell]::new()
-        $text = [iTextSharp.text.Anchor]::new($_.Filename)
+        $font = [iTextSharp.text.FontFactory]::GetFont("Arial", 12, [iTextSharp.text.Font]::UNDERLINE, [iTextSharp.text.BaseColor]::BLUE)
+        $text = [iTextSharp.text.Anchor]::new($_.Filename, $font)
         $text.Reference = $_.Filename
         $para = [iTextSharp.text.Paragraph]::new()
         $para.Add($text) | Out-Null
