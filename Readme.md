@@ -7,5 +7,5 @@
  - Run below Command in folder contains CourtFiles
 ```powershell
 CD <# Folder path which contains court files #>
-HPCaseFile -causelistpath <# causelist pdf file location #> -outpath <# path for pdf file #> -HeaderPattern <# pattern want to match for pages. e.g. Court - 1 or Court\s+-\s+1 #>
+HPCaseFiles -causelistpath <# causelist pdf file location #> -outpath <# path for pdf file #> -HeaderPattern <# pattern want to match for pages. e.g. Court - 1 or Court\s+-\s+1 #>
 ```
