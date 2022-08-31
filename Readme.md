@@ -8,6 +8,7 @@
  import-module <# This folder download location + ReadCourtFile.ps1 #>
  ```
 ## Usage
+ - Run below Command in folder contains CourtFiles
 ```powershell
 HPCaseFile -causelistpath <# causelist pdf file location #> -outpath <# path for excel file #> -HeaderPattern <# pattern want to match for pages. e.g. Court - 1 or Court\s+-\s+1 #>
 ```
